@@ -178,10 +178,30 @@ const loginUser = async (req, res) => {
     }
 }
 
+//@desc  Logout user
+//@route POST /api/users/logout
+//@access Public
+const logoutUser = (req, res) => {
+    try {
+        // Clear the authentication cookies
+        userUtils.clearCookies(res);
+        res.status(200).json({
+            success: true,
+            message: 'Logout successful'
+        });
+    } catch (err) {
+        res.status(500).json({
+            message: 'Logout failed',
+            error: err.message
+        });
+    }
+};
+
 module.exports = {
     getCurrentUser,
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser
 };
 
 

@@ -28,7 +28,10 @@ async function getUserById(userId) {
 }
 
 async function comparePassword(inputPassword, storedHashedPassword) {
-    return await bcrypt.compare(inputPassword, storedHashedPassword);
+    console.log("input password:", inputPassword);
+    const password = await bcrypt.compare(inputPassword, storedHashedPassword)
+    console.log("Password Match:", password);
+    return password;
 }
 
 async function checkRole(userId) {
@@ -55,7 +58,9 @@ const createUser = async (user) => {
         // Start Transaction
         await transaction.begin();
 
-        const userId = generateId();
+        // Use the provided id (from controller) when available so tokens match DB id.
+        // If no id provided, generate one.
+        const userId = user.id || generateId();
 
         // 2. Insert into "User" Table
         const userRequest = new sql.Request(transaction);
@@ -128,7 +133,6 @@ const createUser = async (user) => {
         // 5. Commit Transaction (Save everything)
         await transaction.commit();
 
-        // Return the new user object
         return { 
             id: userId, 
             username: user.username, 
