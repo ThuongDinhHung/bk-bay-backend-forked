@@ -8,6 +8,7 @@ const pool = require('./database'); // database connection
 const userRoutes = require('../routes/userRoutes');
 const reviewRoutes = require('../routes/reviewRoutes');
 const productRoutes = require('../routes/productRoutes');
+const sellerProductsRoutes = require('../routes/sellerProductsRoutes')
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -29,6 +30,7 @@ app.use(cookieParser());
 app.use('/api/users', userRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/sellers', sellerProductsRoutes)
 
 //404 Handler
 app.use((req, res) => {
