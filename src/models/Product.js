@@ -405,6 +405,7 @@ module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
+  addVariationsForProduct,
 
   /*
      New methods
