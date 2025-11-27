@@ -15,7 +15,7 @@ const {
 // returns list of category names
 router.get('/categories', getCategories);
 // Search by category: /api/products/categories?category=beverages
-router.get('/categories', getProductByCategory);
+router.get('/category/:category', getProductByCategory);
 
 // Search by name: /api/products/search?name=apple
 // Returns products name, rating, price, image (can be null)
